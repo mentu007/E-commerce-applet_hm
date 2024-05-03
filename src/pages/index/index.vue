@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { getHomeBannerAPI, getHomeCategoryAPI } from '@/services/home'
-import type { BannerItem } from '@/types/home'
+import type { BannerItem, CategoryItem } from '@/types/home'
 import { onLoad } from '@dcloudio/uni-app'
 import CustomNavbar from './components/CustomNavbar.vue'
 import { ref } from 'vue'
@@ -13,10 +13,10 @@ const getHomeBannerData = async () => {
   const res = await getHomeBannerAPI()
   bannerList.value = res.result
 }
-
+const categoryList = ref<CategoryItem[]>([])
 const getHomeCategoryaData = async () => {
   const res = await getHomeCategoryAPI()
-  console.log(res)
+  categoryList.value = res.result
 }
 
 //页面加载
@@ -30,7 +30,7 @@ onLoad(() => {
   <CustomNavbar />
   <XtxSwiper :list="bannerList" />
   <!-- 分类面板 -->
-  <CategoryPanel />
+  <CategoryPanel :list="categoryList" />
 </template>
 
 <style lang="scss">
