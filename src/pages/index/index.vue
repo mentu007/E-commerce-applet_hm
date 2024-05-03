@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getHomeBannerAPI } from '@/services/home'
+import { getHomeBannerAPI, getHomeCategoryAPI } from '@/services/home'
 import type { BannerItem } from '@/types/home'
 import { onLoad } from '@dcloudio/uni-app'
 import CustomNavbar from './components/CustomNavbar.vue'
@@ -12,11 +12,17 @@ const bannerList = ref<BannerItem[]>([])
 const getHomeBannerData = async () => {
   const res = await getHomeBannerAPI()
   bannerList.value = res.result
+}
+
+const getHomeCategoryaData = async () => {
+  const res = await getHomeCategoryAPI()
   console.log(res)
 }
+
 //页面加载
 onLoad(() => {
   getHomeBannerData()
+  getHomeCategoryaData()
 })
 </script>
 
